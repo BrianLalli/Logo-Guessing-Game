@@ -13,8 +13,32 @@ let scoreCount = 0;
 let count = 10;
 let countdown;
 //For logos
-let logos = ["McDonalds", "Apple", "Louis Vuitton", "Nike", "Audi"];
-// let letters = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "A", "B", "C", "D", "E", "F"];
+let logos = [
+  "McDonalds",
+  "Apple",
+  "Louis Vuitton",
+  "Nike",
+  "Audi",
+  "Microsoft",
+  "Amazon",
+  "Facebook",
+  "Coca Cola",
+  "Samsung",
+  "Walt Disney Pictures",
+  "Toyota",
+  "AT&T",
+  "Verizon",
+  "Intel",
+  "Cisco",
+  "Mercedes Benz",
+  "BMW",
+  "Marlboro",
+  "Budweiser",
+  "Visa",
+  "American Express",
+  "Walmart",
+  "Whole Foods Market",
+];
 
 //Questions and Options Array
 let quizArray = [];
@@ -24,8 +48,8 @@ const generateRandomValue = (array) =>
 
 //Generate Logos
 const logoGenerator = () => {
-  newLogo = "#";
-  for (let i = 0; i < 5; i++) {
+  newLogo = " ";
+  for (let i = 0; i < 1; i++) {
     newLogo += generateRandomValue(logos);
   }
   return newLogo;
