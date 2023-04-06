@@ -12,8 +12,8 @@ let questionCount;
 let scoreCount = 0;
 let count = 10;
 let countdown;
-//For logos
-let logos = [
+//For brands
+let brands = [
   "McDonalds",
   "Apple",
   "Louis Vuitton",
@@ -34,11 +34,39 @@ let logos = [
   "BMW",
   "Marlboro",
   "Budweiser",
-  "Visa",
+  "Mastercard",
   "American Express",
   "Walmart",
   "Whole Foods Market",
 ];
+
+// For logos
+let logos = [
+  "./images/Amazon.jpg",
+  "./images/Apple.png",
+  "./images/American Express.png",
+  "./images/AT&T.png",
+  "./images/Audi.png",
+  "./images/BMW.png",
+  "./images/Budweiser.jpg",
+  "./images/Cisco.jpg",
+  "./images/Coca Cola.jpg",
+  "./images/Facebook.png",
+  "./images/Intel.png",
+  "./images/Louis Vuitton.png",
+  "./images/Marlboro.png",
+  "./images/Mastercard.jpg",
+  "./images/McDonalds.png",
+  "./images/Mercedes Benz.jpg",
+  "./images/Nike.png",
+  "./images/Samsung.jpg",
+  "./images/Toyota.png",
+  "./images/Verizon.png",
+  "./images/Walmart.jpg",
+  "./images/Walt Disney Pictures.png",
+  "./images/Whole Foods Market.png",
+]
+
 
 //Questions and Options Array
 let quizArray = [];
