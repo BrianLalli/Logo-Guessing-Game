@@ -13,7 +13,7 @@ let scoreCount = 0;
 let count = 10;
 let countdown;
 //For brands
-let brands = [
+let logos = [
   "McDonalds",
   "Apple",
   "Louis Vuitton",
@@ -41,42 +41,43 @@ let brands = [
 ];
 
 // For logos
-let logos = [
-  "./images/Amazon.jpg",
-  "./images/Apple.png",
-  "./images/American Express.png",
-  "./images/AT&T.png",
-  "./images/Audi.png",
-  "./images/BMW.png",
-  "./images/Budweiser.jpg",
-  "./images/Cisco.jpg",
-  "./images/Coca Cola.jpg",
-  "./images/Facebook.png",
-  "./images/Intel.png",
-  "./images/Louis Vuitton.png",
-  "./images/Marlboro.png",
-  "./images/Mastercard.jpg",
-  "./images/McDonalds.png",
-  "./images/Mercedes Benz.jpg",
-  "./images/Nike.png",
-  "./images/Samsung.jpg",
-  "./images/Toyota.png",
-  "./images/Verizon.png",
-  "./images/Walmart.jpg",
-  "./images/Walt Disney Pictures.png",
-  "./images/Whole Foods Market.png",
+let imageArray = [
+  "./assets/images/Amazon.jpg",
+  "./assets/images/Apple.png",
+  "./assets/images/American Express.png",
+  "./assets/images/AT&T.png",
+  "./assets/images/Audi.png",
+  "./assets/images/BMW.png",
+  "./assets/images/Budweiser.jpg",
+  "./assets/images/Cisco.jpg",
+  "./assets/images/Coca Cola.jpg",
+  "./assets/images/Facebook.png",
+  "./assets/images/Intel.png",
+  "./assets/images/Louis Vuitton.png",
+  "./assets/images/Marlboro.png",
+  "./assets/images/Mastercard.jpg",
+  "./assets/images/McDonalds.png",
+  "./assets/images/Mercedes Benz.jpg",
+  "./assets/images/Microsoft.png",
+  "./assets/images/Nike.png",
+  "./assets/images/Samsung.jpg",
+  "./assets/images/Toyota.png",
+  "./assets/images/Verizon.png",
+  "./assets/images/Walmart.jpg",
+  "./assets/images/Walt Disney Pictures.png",
+  "./assets/images/Whole Foods Market.png",
 ]
 
 
-//Questions and Options Array
+// //Questions and Options Array
 let quizArray = [];
 
 const generateRandomValue = (array) =>
-  array[Math.floor(Math.random() * array.length)];
+ array[Math.floor(Math.random() * array.length)];
 
 //Generate Logos
 const logoGenerator = () => {
-  newLogo = " ";
+  newLogo = "";
   for (let i = 0; i < 1; i++) {
     newLogo += generateRandomValue(logos);
   }
@@ -84,15 +85,15 @@ const logoGenerator = () => {
 };
 
 //Create Options
-const populateOptions = (optionsArray) => {
+const populateOptions = (imageArray) => {
   let expectedLength = 4;
-  while (optionsArray.length < expectedLength) {
+  while (imageArray.length < expectedLength) {
     let logo = logoGenerator();
-    if (!optionsArray.includes(logo)) {
-      optionsArray.push(logo);
+    if (!imageArray.includes(logo)) {
+      imageArray.push(logo);
     }
   }
-  return optionsArray;
+  return imageArray;
 };
 
 //Create quiz Object
@@ -102,14 +103,16 @@ const populateQuiz = () => {
     let allLogos = [];
     allLogos.push(currentLogo);
     allLogos = populateOptions(allLogos);
+    let logoImages = allLogos.map(logo => {
+      return {imgFile: imageArray.find(str => str.includes(logo)), logo}
+    })
     quizArray.push({
       id: i,
       correct: currentLogo,
-      options: allLogos,
+      options: logoImages,
     });
   }
 };
-
 //Next button
 nextButton.addEventListener(
   "click",
@@ -189,15 +192,17 @@ function quizCreator() {
     questionDiv.classList.add("question");
     questionDiv.innerHTML = `<div class="question-color">${i.correct}</div>`;
     div.appendChild(questionDiv);
+    console.log(i);
+    div.innerHTML += `<div class="button-container">`
+    for(let option of i.options) {
+      if(option.imgFile) {
+        div.innerHTML += `<button class="option-div" onclick="checker(this)" style= "background-image: url(${option.imgFile})"></button>`
+      } else {
+        console.log(`Missing logo for - ${option.logo}!`)
+      }
+    }
+    div.innerHTML += `</div>`
     //Options
-    div.innerHTML += `
-    <div class="button-container">
-    <button class="option-div" onclick="checker(this)" style="background-color: ${i.options[0]}" data-option="${i.options[0]}"></button>
-    <button class="option-div" onclick="checker(this)" style="background-color: ${i.options[1]}" data-option="${i.options[1]}"></button>
-    <button class="option-div" onclick="checker(this)" style="background-color: ${i.options[2]}" data-option="${i.options[2]}"></button>
-    <button class="option-div" onclick="checker(this)" style="background-color: ${i.options[3]}" data-option="${i.options[3]}"></button>
-    </div>
-    `;
     quizContainer.appendChild(div);
   }
 }
@@ -240,6 +245,7 @@ function initial() {
   timerDisplay();
   quizCreator();
   quizDisplay(questionCount);
+  displayNext(); //remove after testing2
 }
 
 //Restart game

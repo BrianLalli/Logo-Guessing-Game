@@ -84,12 +84,12 @@
   .option-div:disabled {
     cursor: not-allowed;
   }
-  .correct {
+  /* .correct {
     background: url("correct.svg");
   }
   .incorrect {
     background: url("incorrect.svg");
-  }
+  } */
   .correct,
   .incorrect {
     background-repeat: no-repeat;
