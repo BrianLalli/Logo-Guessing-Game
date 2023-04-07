@@ -16,64 +16,63 @@ let countdown;
 let logos = [
   "McDonalds",
   "Apple",
-  "Louis Vuitton",
+  "LouisVuitton",
   "Nike",
   "Audi",
   "Microsoft",
   "Amazon",
   "Facebook",
-  "Coca Cola",
+  "CocaCola",
   "Samsung",
-  "Walt Disney Pictures",
+  "WaltDisneyPictures",
   "Toyota",
   "AT&T",
   "Verizon",
   "Intel",
   "Cisco",
-  "Mercedes Benz",
+  "MercedesBenz",
   "BMW",
-  "Marlboro",
+  // "Marlboro",
   "Budweiser",
   "Mastercard",
-  "American Express",
+  "AmericanExpress",
   "Walmart",
-  "Whole Foods Market",
+  "WholeFoodsMarket",
 ];
 
 // For logos
 let imageArray = [
   "./assets/images/Amazon.png",
   "./assets/images/Apple.png",
-  "./assets/images/American Express.png",
+  "./assets/images/AmericanExpress.png",
   "./assets/images/AT&T.png",
   "./assets/images/Audi.png",
   "./assets/images/BMW.png",
   "./assets/images/Budweiser.png",
   "./assets/images/Cisco.png",
-  "./assets/images/Coca Cola.png",
+  "./assets/images/CocaCola.png",
   "./assets/images/Facebook.png",
   "./assets/images/Intel.png",
-  "./assets/images/Louis Vuitton.png",
-  "./assets/images/Marlboro.png",
+  "./assets/images/LouisVuitton.png",
+  // "./assets/images/Marlboro.png",
   "./assets/images/Mastercard.png",
   "./assets/images/McDonalds.png",
-  "./assets/images/Mercedes Benz.png",
+  "./assets/images/MercedesBenz.png",
   "./assets/images/Microsoft.png",
   "./assets/images/Nike.png",
   "./assets/images/Samsung.png",
   "./assets/images/Toyota.png",
   "./assets/images/Verizon.png",
   "./assets/images/Walmart.png",
-  "./assets/images/Walt Disney Pictures.png",
-  "./assets/images/Whole Foods Market.png",
-]
-
+  "./assets/images/WaltDisneyPictures.png",
+  "./assets/images/WholeFoodsMarket.png",
+];
 
 // //Questions and Options Array
 let quizArray = [];
 
 const generateRandomValue = (array) =>
- array[Math.floor(Math.random() * array.length)];
+  array[Math.floor(Math.random() * array.length)];
 
 //Generate Logos
 const logoGenerator = () => {
@@ -103,9 +102,9 @@ const populateQuiz = () => {
     let allLogos = [];
     allLogos.push(currentLogo);
     allLogos = populateOptions(allLogos);
-    let logoImages = allLogos.map(logo => {
-      return {imgFile: imageArray.find(str => str.includes(logo)), logo}
-    })
+    let logoImages = allLogos.map((logo) => {
+      return { imgFile: imageArray.find((str) => str.includes(logo)), logo };
+    });
     quizArray.push({
       id: i,
       correct: currentLogo,
@@ -131,12 +130,12 @@ nextButton.addEventListener(
     } else {
       //display questionCount
       numOfQuestions.innerHTML =
-        questionCount + 1 + " of " + quizArray.length + " Question";
+        questionCount + 0 + " of " + quizArray.length + " Question";
 
       //display quiz
       quizDisplay(questionCount);
-      //count=11(so it start with 10)
-      count = 10;
+      //count=11(so it starts with 10)
+      count = 5;
       //clearInterval for next question
       clearInterval(countdown);
       //display timer
@@ -193,15 +192,15 @@ function quizCreator() {
     questionDiv.innerHTML = `<div class="question-color">${i.correct}</div>`;
     div.appendChild(questionDiv);
     console.log(i);
-    div.innerHTML += `<div class="button-container">`
-    for(let option of i.options) {
-      if(option.imgFile) {
-        div.innerHTML += `<button class="option-div" onclick="checker(this)" style= "background-image: url(${option.imgFile})"></button>`
+    div.innerHTML += `<div class="button-container">`;
+    for (let option of i.options) {
+      if (option.imgFile) {
+        div.innerHTML += `<button class="option-div" onclick="checker(this)" style= "background-image: url(${option.imgFile})"></button>`;
       } else {
-        console.log(`Missing logo for - ${option.logo}!`)
+        console.log(`Missing logo for - ${option.logo}!`);
       }
     }
-    div.innerHTML += `</div>`
+    div.innerHTML += `</div>`;
     //Options
     quizContainer.appendChild(div);
   }
