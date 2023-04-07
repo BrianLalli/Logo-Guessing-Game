@@ -78,7 +78,7 @@
     height: 10em;
     padding: 1em;
     margin: 0.3em 0;
-    text-align: left;
+    /* text-align: left; */
     border-radius: 0.5em;
   }
   .option-div:disabled {

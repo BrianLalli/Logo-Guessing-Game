@@ -42,28 +42,28 @@ let logos = [
 
 // For logos
 let imageArray = [
-  "./assets/images/Amazon.jpg",
+  "./assets/images/Amazon.png",
   "./assets/images/Apple.png",
   "./assets/images/American Express.png",
   "./assets/images/AT&T.png",
   "./assets/images/Audi.png",
   "./assets/images/BMW.png",
-  "./assets/images/Budweiser.jpg",
-  "./assets/images/Cisco.jpg",
-  "./assets/images/Coca Cola.jpg",
+  "./assets/images/Budweiser.png",
+  "./assets/images/Cisco.png",
+  "./assets/images/Coca Cola.png",
   "./assets/images/Facebook.png",
   "./assets/images/Intel.png",
   "./assets/images/Louis Vuitton.png",
   "./assets/images/Marlboro.png",
-  "./assets/images/Mastercard.jpg",
+  "./assets/images/Mastercard.png",
   "./assets/images/McDonalds.png",
-  "./assets/images/Mercedes Benz.jpg",
+  "./assets/images/Mercedes Benz.png",
   "./assets/images/Microsoft.png",
   "./assets/images/Nike.png",
-  "./assets/images/Samsung.jpg",
+  "./assets/images/Samsung.png",
   "./assets/images/Toyota.png",
   "./assets/images/Verizon.png",
-  "./assets/images/Walmart.jpg",
+  "./assets/images/Walmart.png",
   "./assets/images/Walt Disney Pictures.png",
   "./assets/images/Whole Foods Market.png",
 ]
@@ -211,7 +211,7 @@ function checker(userOption) {
   let userSolution = userOption.getAttribute("data-option");
   let question =
     document.getElementsByClassName("container-mid")[questionCount];
-  let options = question.querySelectorAll(".option-div");
+  let options = question.querySelectorAll("i.option-div");
   //If users clicked answer === correct
   if (userSolution === quizArray[questionCount].correct) {
     userOption.classList.add("correct");
