@@ -5,7 +5,7 @@
   }
   body {
     margin: 0;
-    background-color: #9873fe;
+    background-color: #48C3F5;
   }
   button {
     border: none;
@@ -22,7 +22,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #9873fe;
+    background-color: #48C3F5;
   }
   #start-button,
   #restart {
@@ -80,6 +80,7 @@
     margin: 0.3em 0;
     /* text-align: left; */
     border-radius: 0.5em;
+    border: 3px solid black;
   }
   .option-div:disabled {
     cursor: not-allowed;
@@ -98,8 +99,8 @@
   }
   #next-button {
     font-size: 1.1em;
-    background-color: #9873fe;
-    color: #ffffff;
+    background-color: #F5972F;
+    color: #020000;
     padding: 0.4em 2em;
     border-radius: 0.3em;
   }
