@@ -268,7 +268,7 @@ function initial() {
   questionCount = 0;
   scoreCount = 0;
   clearInterval(countdown);
-  count = 10;
+  count = 5;
   timerDisplay();
   quizCreator();
   quizDisplay(questionCount);
