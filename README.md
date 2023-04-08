@@ -4,7 +4,7 @@
 Click [here]().
 
 ## Description
-User friendly logo guessing game. 
+User friendly logo guessing game. How well do you know your logos?
 
 ## Table of Contents
 - [How it Works](#how-it-works)
