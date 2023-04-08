@@ -22,7 +22,7 @@ let logos = [
   "Microsoft",
   "Amazon",
   "Facebook",
-  "CocaCola",
+  // "CocaCola",
   "Samsung",
   "WaltDisneyPictures",
   "Toyota",
@@ -35,22 +35,36 @@ let logos = [
   // "Marlboro",
   "Budweiser",
   "Mastercard",
-  "AmericanExpress",
+  // "AmericanExpress",
   "Walmart",
   "WholeFoodsMarket",
+  "Tesla",
+  "Starbucks",
+  "ups",
+  "BankofAmerica",
+  "Accenture",
+  "Citi",
+  "Instagram",
+  "Lowes",
+  "Chase",
+  "Netflix",
+  "Target",
+  "Ford",
+  "Pepsi",
+  "Shell",
 ];
 
 // For logos
 let imageArray = [
   "./assets/images/Amazon.png",
   "./assets/images/Apple.png",
-  "./assets/images/AmericanExpress.png",
+  // "./assets/images/AmericanExpress.png",
   "./assets/images/AT&T.png",
   "./assets/images/Audi.png",
   "./assets/images/BMW.png",
   "./assets/images/Budweiser.png",
   "./assets/images/Cisco.png",
-  "./assets/images/CocaCola.png",
+  // "./assets/images/CocaCola.png",
   "./assets/images/Facebook.png",
   "./assets/images/Intel.png",
   "./assets/images/LouisVuitton.png",
@@ -66,6 +80,20 @@ let imageArray = [
   "./assets/images/Walmart.png",
   "./assets/images/WaltDisneyPictures.png",
   "./assets/images/WholeFoodsMarket.png",
+  "./assets/images/Tesla.png",
+  "./assets/images/Starbucks.png",
+  "./assets/images/ups.png",
+  "./assets/images/BankofAmerica.png",
+  "./assets/images/Accenture.png",
+  "./assets/images/Citi.png",
+  "./assets/images/Instagram.png",
+  "./assets/images/Lowes.png",
+  "./assets/images/Chase.png",
+  "./assets/images/Netflix.png",
+  "./assets/images/Target.png",
+  "./assets/images/Ford.png",
+  "./assets/images/Pepsi.png",
+  "./assets/images/Shell.png",
 ];
 
 // //Questions and Options Array
@@ -130,7 +158,7 @@ nextButton.addEventListener(
     } else {
       //display questionCount
       numOfQuestions.innerHTML =
-        questionCount + 0 + " of " + quizArray.length + " Question";
+        questionCount + 1 + " of " + quizArray.length + " Question";
 
       //display quiz
       quizDisplay(questionCount);
@@ -244,7 +272,6 @@ function initial() {
   timerDisplay();
   quizCreator();
   quizDisplay(questionCount);
-  displayNext(); //remove after testing2
 }
 
 //Restart game
