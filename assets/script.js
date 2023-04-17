@@ -8,6 +8,7 @@ let restart = document.getElementById("restart");
 let userScore = document.getElementById("user-score");
 let startScreen = document.querySelector(".start-screen");
 let startButton = document.getElementById("start-button");
+let instructions = document.getElementById("instructions");
 let questionCount;
 let scoreCount = 0;
 let count = 10;
@@ -96,6 +97,10 @@ let imageArray = [
   "./assets/images/Shell.png",
 ];
 
+// Instructions & Logo
+instructions.innerHTML = "Guess the logo without seeing it in full";
+let oogl = document.getElementById("oogl");
+oogl.innerHTML="<img src=\'https://i.imgur.com/acUmQXm.png\' width=\'200px\' height=\'200px\'>";
 // //Questions and Options Array
 let quizArray = [];
 
@@ -162,7 +167,6 @@ nextButton.addEventListener(
 
       //display quiz
       quizDisplay(questionCount);
-      //count=11(so it starts with 10)
       count = 5;
       //clearInterval for next question
       clearInterval(countdown);
@@ -217,7 +221,7 @@ function quizCreator() {
     //question
     let questionDiv = document.createElement("p");
     questionDiv.classList.add("question");
-    questionDiv.innerHTML = `<div class="question-color">${i.correct}</div>`;
+    questionDiv.innerHTML = `<div class="question-logo">${i.correct}</div>`;
     div.appendChild(questionDiv);
     console.log(i);
     div.innerHTML += `<div class="button-container">`;

@@ -23,10 +23,12 @@
     justify-content: center;
     align-items: center;
     background-color: #48C3F5;
+    gap: 1em;
   }
   #start-button,
   #restart {
     position: absolute;
+    margin-top: 355px;
     font-size: 1.2em;
     padding: 1em 3em;
     border-radius: 2em;
@@ -60,7 +62,7 @@
   .timer span {
     font-weight: 600;
   }
-  .question-color {
+  .question-logo {
     font-size: 1.5em;
     text-align: center;
   }
@@ -78,7 +80,6 @@
     height: 10em;
     padding: 1em;
     margin: 0.3em 0;
-    /* text-align: left; */
     border-radius: 0.5em;
     border: 3px solid black;
   }
@@ -99,8 +100,8 @@
   }
   #next-button {
     font-size: 1.1em;
-    background-color: #48C3F5;
-    color: #ffffff;
+    background-color: #FCEF27;
+    color: black;
     padding: 0.4em 2em;
     border-radius: 0.3em;
   }
