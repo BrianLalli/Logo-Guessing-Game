@@ -9,8 +9,8 @@ let userScore = document.getElementById("user-score");
 let startScreen = document.querySelector(".start-screen");
 let startButton = document.getElementById("start-button");
 let instructions = document.getElementById("instructions");
-let questionCount;
 let scoreCount = 0;
+let questionCount = 0;
 let count = 10;
 let countdown;
 //For brands
@@ -122,6 +122,8 @@ let imageArray = [
   "./assets/images/Hermes.png",
 ];
 
+console.log("initialScore", scoreCount)
+
 // Instructions & Logo
 instructions.innerHTML = "Guess the logo without seeing it in full";
 let oogl = document.getElementById("oogl");
@@ -185,11 +187,12 @@ nextButton.addEventListener(
       //User score
       userScore.innerHTML =
         "Your score is " + scoreCount + " out of " + questionCount;
+        console.log("finalScore", scoreCount)
     } else {
       //display questionCount
       numOfQuestions.innerHTML =
         questionCount + 1 + " of " + quizArray.length + " Question";
-
+        console.log("updatedScore", scoreCount)
       //display quiz
       quizDisplay(questionCount);
       count = 5;
@@ -248,7 +251,7 @@ function quizCreator() {
     questionDiv.classList.add("question");
     questionDiv.innerHTML = `<div class="question-logo">${i.correct}</div>`;
     div.appendChild(questionDiv);
-    console.log(i);
+    console.log("i", i);
     div.innerHTML += `<div class="button-container">`;
     for (let option of i.options) {
       if (option.imgFile) {
@@ -267,10 +270,12 @@ function checker(userOption) {
   let userSolution = userOption.getAttribute("data-option");
   let question =
     document.getElementsByClassName("container-mid")[questionCount];
-  let options = question.querySelectorAll("i.option-div");
+    let options = question.querySelectorAll("button.option-div");
+    console.log(quizArray[questionCount].correct);
+    console.log("User Solution", userSolution);
   //If users clicked answer === correct
   if (userSolution === quizArray[questionCount].correct) {
-    userOption.classList.add("correct");
+    // userOption.classList.add("correct");
     scoreCount++;
   } else {
     userOption.classList.add("incorrect");
