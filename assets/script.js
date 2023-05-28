@@ -255,7 +255,7 @@ function quizCreator() {
     div.innerHTML += `<div class="button-container">`;
     for (let option of i.options) {
       if (option.imgFile) {
-        div.innerHTML += `<button class="option-div" onclick="checker(this)" style= "background-image: url(${option.imgFile})"></button>`;
+        div.innerHTML += `<button class="option-div" onclick="checker(this)" data-option="${option.logo}" style= "background-image: url(${option.imgFile})"></button>`;
       } else {
         console.log(`Missing logo for - ${option.logo}!`);
       }
@@ -287,6 +287,8 @@ function checker(userOption) {
       }
     });
   }
+
+
   //clear interval
   clearInterval(countdown);
   //disable all options
@@ -307,6 +309,7 @@ function initial() {
   quizCreator();
   quizDisplay(questionCount);
 }
+
 
 //Restart game
 restart.addEventListener("click", () => {
