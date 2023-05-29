@@ -1,0 +1,6 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS logo_game_db;
+
+-- CREATE DATABASE
+CREATE DATABASE logo_game_db;
+
