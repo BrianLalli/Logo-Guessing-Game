@@ -135,30 +135,13 @@ const generateRandomValue = (array) =>
   array[Math.floor(Math.random() * array.length)];
 
 //Generate Logos
-// const logoGenerator = () => {
-//   newLogo = "";
-//   for (let i = 0; i < 1; i++) {
-//     newLogo += generateRandomValue(logos);
-//   }
-//   return newLogo;
-// };
 const logoGenerator = () => {
-  return new Promise((resolve, reject) => {
-    // Make an AJAX request to fetch the logos from the server
-    fetch('/api/logos')
-      .then(response => response.json())
-      .then(logos => {
-        // Select a random logo from the received logos
-        const randomLogo = logos[Math.floor(Math.random() * logos.length)];
-        resolve(randomLogo);
-      })
-      .catch(error => {
-        console.error('Error fetching logos:', error);
-        reject(error);
-      });
-  });
+  newLogo = "";
+  for (let i = 0; i < 1; i++) {
+    newLogo += generateRandomValue(logos);
+  }
+  return newLogo;
 };
-
 
 //Create Options
 const populateOptions = (imageArray) => {
