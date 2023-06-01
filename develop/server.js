@@ -3,23 +3,37 @@ const mysql = require('mysql');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3000;
+const port = 3307;
 
 // MySQL Connection
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'your_username',
-  password: 'your_password',
-  database: 'logo_game_db'
-});
+    host: 'localhost',
+    user: 'root',
+    password: 'ProRight50!',
+    database: 'logo_game_db',
+    authPlugin: 'mysql_native_password'
+  });
+  
 
-connection.connect(err => {
-  if (err) {
-    console.error('Error connecting to the database');
-    return;
-  }
-  console.log('Connected to the database');
-});
+// Attempt to connect to the database
+connection.connect((error) => {
+    if (error) {
+      console.error('Error connecting to the database:', error);
+      return;
+    }
+    console.log('Connected to the database!');
+  });
+  
+  // Handle connection errors
+  connection.on('error', (error) => {
+    console.error('Database error:', error);
+  });
+  
+  // Close the database connection on server shutdown
+  process.on('SIGINT', () => {
+    connection.end();
+    process.exit();
+  });
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
