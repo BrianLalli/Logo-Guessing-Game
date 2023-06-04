@@ -1,7 +1,10 @@
 const express = require('express');
+const cors = require('cors');
 const connection = require('./db');
 
 const app = express();
+
+app.use(cors()); // Enable CORS for all routes
 
 app.get('/logos', (req, res) => {
   connection.query('SELECT * FROM logos', (err, result) => {
@@ -14,6 +17,6 @@ app.get('/logos', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
+app.listen(3307, () => {
+  console.log('Server is running on http://localhost:3307');
 });
