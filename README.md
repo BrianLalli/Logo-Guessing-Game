@@ -24,9 +24,6 @@ User friendly logo guessing game. How well do you know your logos?
 ![Score Page]()
 
 
-## Future Development:
-
-
 ## Resources:
 
 
