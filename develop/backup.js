@@ -14,118 +14,112 @@ let questionCount = 0;
 let count = 10;
 let countdown;
 
-//For brands
 let logos = [
-  {
-    name: "Accenture",
-    path: "https://oogl.s3.amazonaws.com/images/Accenture.png",
-  },
-  { name: "Amazon", path: "https://oogl.s3.amazonaws.com/images/Amazon.png" },
-  { name: "Apple", path: "https://oogl.s3.amazonaws.com/images/Apple.png" },
-  { name: "AT&T", path: "https://oogl.s3.amazonaws.com/images/AT&T.png" },
-  { name: "Audi", path: "https://oogl.s3.amazonaws.com/images/Audi.png" },
-  {
-    name: "BankofAmerica",
-    path: "https://oogl.s3.amazonaws.com/images/BankofAmerica.png",
-  },
-  { name: "BMW", path: "https://oogl.s3.amazonaws.com/images/BMW.png" },
-  { name: "Chanel", path: "https://oogl.s3.amazonaws.com/images/Chanel.png" },
-  {
-    name: "ChatGPT",
-    path: "https://oogl.s3.amazonaws.com/images/ChatGPT.png",
-  },
-  { name: "Chase", path: "https://oogl.s3.amazonaws.com/images/Chase.png" },
-  {
-    name: "Chick-fil-A",
-    path: "https://oogl.s3.amazonaws.com/images/Chick-fil-A.png",
-  },
-  {
-    name: "Chevrolet",
-    path: "https://oogl.s3.amazonaws.com/images/Chevrolet.png",
-  },
-  { name: "Cisco", path: "https://oogl.s3.amazonaws.com/images/Cisco.png" },
-  { name: "Citi", path: "https://oogl.s3.amazonaws.com/images/Citi.png" },
-  { name: "Corona", path: "https://oogl.s3.amazonaws.com/images/Corona.png" },
-  {
-    name: "Facebook",
-    path: "https://oogl.s3.amazonaws.com/images/Facebook.png",
-  },
-  { name: "Ford", path: "https://oogl.s3.amazonaws.com/images/Ford.png" },
-  { name: "Fox", path: "https://oogl.s3.amazonaws.com/images/Fox.png" },
-  { name: "H&M", path: "https://oogl.s3.amazonaws.com/images/H&M.png" },
-  { name: "Hermes", path: "https://oogl.s3.amazonaws.com/images/Hermes.png" },
-  { name: "HSBC", path: "https://oogl.s3.amazonaws.com/images/HSBC.png" },
-  { name: "HSBC", path: "https://oogl.s3.amazonaws.com/images/HSBC.png" },
-  { name: "Intel", path: "https://oogl.s3.amazonaws.com/images/Intel.png" },
-  {
-    name: "Instagram",
-    path: "https://oogl.s3.amazonaws.com/images/Instagram.png",
-  },
-  {
-    name: "Kelloggs",
-    path: "https://oogl.s3.amazonaws.com/images/Kelloggs.png",
-  },
-  { name: "KFC", path: "https://oogl.s3.amazonaws.com/images/KFC.png" },
-  { name: "Lexus", path: "https://oogl.s3.amazonaws.com/images/Lexus.png" },
-  {
-    name: "LouisVuitton",
-    path: "https://oogl.s3.amazonaws.com/images/LouisVuitton.png",
-  },
-  { name: "Lowes", path: "https://oogl.s3.amazonaws.com/images/Lowes.png" },
-  {
-    name: "Mastercard",
-    path: "https://oogl.s3.amazonaws.com/images/Mastercard.png",
-  },
-  {
-    name: "McDonalds",
-    path: "https://oogl.s3.amazonaws.com/images/McDonalds.png",
-  },
-  {
-    name: "MercedesBenz",
-    path: "https://oogl.s3.amazonaws.com/images/MercedesBenz.png",
-  },
-  {
-    name: "Microsoft",
-    path: "https://oogl.s3.amazonaws.com/images/Microsoft.png",
-  },
-  {
-    name: "Netflix",
-    path: "https://oogl.s3.amazonaws.com/images/Netflix.png",
-  },
-  { name: "Nike", path: "https://oogl.s3.amazonaws.com/images/Nike.png" },
-  { name: "Nissan", path: "https://oogl.s3.amazonaws.com/images/Nissan.png" },
-  { name: "oogl", path: "https://oogl.s3.amazonaws.com/images/oogl.png" },
-  {
-    name: "Porsche",
-    path: "https://oogl.s3.amazonaws.com/images/Porsche.png",
-  },
-  { name: "Rolex", path: "https://oogl.s3.amazonaws.com/images/Rolex.png" },
-  {
-    name: "Samsung",
-    path: "https://oogl.s3.amazonaws.com/images/Samsung.png",
-  },
-  { name: "Shell", path: "https://oogl.s3.amazonaws.com/images/Shell.png" },
-  {
-    name: "Starbucks",
-    path: "https://oogl.s3.amazonaws.com/images/Starbucks.png",
-  },
-  { name: "Target", path: "https://oogl.s3.amazonaws.com/images/Target.png" },
-  { name: "Tesla", path: "https://oogl.s3.amazonaws.com/images/Tesla.png" },
-  { name: "Toyota", path: "https://oogl.s3.amazonaws.com/images/Toyota.png" },
-  { name: "Uniqlo", path: "https://oogl.s3.amazonaws.com/images/Uniqlo.png" },
-  { name: "ups", path: "https://oogl.s3.amazonaws.com/images/ups.png" },
-  {
-    name: "Verizon",
-    path: "https://oogl.s3.amazonaws.com/images/Verizon.png",
-  },
-  {
-    name: "WaltDisneyPictures",
-    path: "https://oogl.s3.amazonaws.com/images/WaltDisneyPictures.png",
-  },
-  {
-    name: "WholeFoodsMarket",
-    path: "https://oogl.s3.amazonaws.com/images/WholeFoodsMarket.png",
-  },
+  "McDonalds",
+  "Apple",
+  "LouisVuitton",
+  "Nike",
+  "Audi",
+  "Microsoft",
+  "Amazon",
+  "Facebook",
+  "Samsung",
+  "WaltDisneyPictures",
+  "Toyota",
+  "AT&T",
+  "Verizon",
+  "Intel",
+  "Cisco",
+  "MercedesBenz",
+  "BMW",
+  "Mastercard",
+  "WholeFoodsMarket",
+  "Tesla",
+  "Starbucks",
+  "ups",
+  "BankofAmerica",
+  "Accenture",
+  "Citi",
+  "Instagram",
+  "Lowes",
+  "Chase",
+  "Netflix",
+  "Target",
+  "Ford",
+  "Shell",
+  "oogl",
+  "ChatGPT",
+  "KFC",
+  "Chick-fil-A",
+  "Chanel",
+  "Rolex",
+  "Kelloggs",
+  "Uniqlo",
+  "Nissan",
+  "Lexus",
+  "Corona",
+  "Chevrolet",
+  "Porsche",
+  "H&M",
+  "Fox",
+  "hp",
+  "HSBC",
+  "Hermes",
+];
+
+// For logos
+let imageArray = [
+  "./assets/images/Amazon.png",
+  "./assets/images/Apple.png",
+  "./assets/images/AT&T.png",
+  "./assets/images/Audi.png",
+  "./assets/images/BMW.png",
+  "./assets/images/Cisco.png",
+  "./assets/images/Facebook.png",
+  "./assets/images/Intel.png",
+  "./assets/images/LouisVuitton.png",
+  "./assets/images/Mastercard.png",
+  "./assets/images/McDonalds.png",
+  "./assets/images/MercedesBenz.png",
+  "./assets/images/Microsoft.png",
+  "./assets/images/Nike.png",
+  "./assets/images/Samsung.png",
+  "./assets/images/Toyota.png",
+  "./assets/images/Verizon.png",
+  "./assets/images/Walmart.png",
+  "./assets/images/WaltDisneyPictures.png",
+  "./assets/images/WholeFoodsMarket.png",
+  "./assets/images/Tesla.png",
+  "./assets/images/Starbucks.png",
+  "./assets/images/ups.png",
+  "./assets/images/BankofAmerica.png",
+  "./assets/images/Accenture.png",
+  "./assets/images/Citi.png",
+  "./assets/images/Instagram.png",
+  "./assets/images/Lowes.png",
+  "./assets/images/Chase.png",
+  "./assets/images/Netflix.png",
+  "./assets/images/Target.png",
+  "./assets/images/Ford.png",
+  "./assets/images/Shell.png",
+  "./assets/images/oogl.png",
+  "./assets/images/ChatGPT.png",
+  "./assets/images/KFC.png",
+  "./assets/images/Chick-fil-A.png",
+  "./assets/images/Chanel.png",
+  "./assets/images/Rolex.png",
+  "./assets/images/Kelloggs.png",
+  "./assets/images/Uniqlo.png",
+  "./assets/images/Nissan.png",
+  "./assets/images/Lexus.png",
+  "./assets/images/Corona.png",
+  "./assets/images/Chevrolet.png",
+  "./assets/images/Porsche.png",
+  "./assets/images/H&M.png",
+  "./assets/images/Fox.png",
+  "./assets/images/hp.png",
+  "./assets/images/HSBC.png",
+  "./assets/images/Hermes.png",
 ];
 
 console.log("initialScore", scoreCount);
@@ -149,20 +143,6 @@ const logoGenerator = () => {
   }
   return newLogo;
 };
-
-// Using Axios to get images from AWS
-const getLogos = () => {
-  logos.forEach((logo) => {
-    axios
-      .get(logo.path)
-      .then((response) => {
-        const image = response.data;
-        console.log(`GET logo`, image);
-      })
-      .catch((error) => console.error(error));
-  });
-};
-getLogos();
 
 //Create Options
 const populateOptions = (imageArray) => {
