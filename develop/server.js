@@ -1,70 +1,64 @@
 const express = require('express');
-const mysql = require('mysql');
-const bodyParser = require('body-parser');
-
+// const AWS = require('aws-sdk');
+const fetch = require("node-fetch")
 const app = express();
-const port = 3307;
+const port = 3000;
+var axios = require('axios');
 
-// MySQL Connection
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'ProRight50!',
-    database: 'logo_game_db',
-    authPlugin: 'mysql_native_password'
-  });
+app.get('/', (req, res) => {
+  var config = {
+    method: 'get',
+    url: 'https://oogl.s3.amazonaws.com/images/Accenture.png',
+    headers: { }
+  };
   
-
-// Attempt to connect to the database
-connection.connect((error) => {
-    if (error) {
-      console.error('Error connecting to the database:', error);
-      return;
-    }
-    console.log('Connected to the database!');
+  axios(config)
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch(function (error) {
+    console.log(error);
   });
-  
-  // Handle connection errors
-  connection.on('error', (error) => {
-    console.error('Database error:', error);
-  });
-  
-  // Close the database connection on server shutdown
-  process.on('SIGINT', () => {
-    connection.end();
-    process.exit();
-  });
+})
 
-// Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
-// Serve static files
-app.use(express.static('public'));
+// // Configure AWS SDK with your credentials
+// AWS.config.update({
+//   accessKeyId: 'AKIA4VNGJFDZ2D2FFYYK',
+//   secretAccessKey: 'mIsP+7F4eZNaODXIvbLS/9vo3RLsUjZpppDcX0La'
+// });
 
-// API Routes
-app.get('/api/logos', (req, res) => {
-  connection.query('SELECT * FROM logos', (err, results) => {
-    if (err) {
-      console.error('Error fetching logos:', err);
-      res.status(500).json({ error: 'Failed to fetch logos' });
-      return;
-    }
-    res.json(results);
-  });
-});
+// // Create an instance of the S3 service
+// const s3 = new AWS.S3();
 
-app.post('/api/scores', (req, res) => {
-  const { score } = req.body;
-  connection.query('INSERT INTO scores (score) VALUES (?)', [score], (err, result) => {
-    if (err) {
-      console.error('Error saving score:', err);
-      res.status(500).json({ error: 'Failed to save score' });
-      return;
-    }
-    res.sendStatus(200);
-  });
-});
+// // Define a route to retrieve an image from the S3 bucket
+// app.get('s3://oogl/images/', (req, res) => {
+//   const { key } = req.params;
+
+//   // Specify the bucket name and key of the image file
+//   const params = {
+//     Bucket: 'oogl',
+//     Key: `images/Accenture.png`
+//   };
+
+//   console.log(`Retrieving image with key: ${key}`);
+
+//   // Retrieve the image from the S3 bucket
+//   s3.getObject(params, (err, data) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).send('Error retrieving image from S3');
+//     }
+
+//     console.log(`Image retrieved successfully with key: ${key}`);
+
+//     // Set the appropriate content type for the response
+//     res.setHeader('Content-Type', data.ContentType);
+
+//     // Return the image data
+//     res.send(data.Body);
+//   });
+// });
 
 // Start the server
 app.listen(port, () => {
