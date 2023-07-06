@@ -1,7 +1,7 @@
 # Logo-Guessing-Game
 
 ## Deployed Link
-Click [here](https://ooglapp.com/).
+Click [here](https://ooglapp.godaddysites.com/).
 
 ## Description
 User friendly logo guessing game. How well do you know your logos?
@@ -22,9 +22,6 @@ User friendly logo guessing game. How well do you know your logos?
 
 
 ![Score Page]()
-
-
-## Future Development:
 
 
 ## Resources:
