@@ -135,56 +135,76 @@ instructions.innerHTML = "Guess the logo without seeing it in full";
 let oogl = document.getElementById("oogl");
 oogl.innerHTML =
   "<img src='https://i.imgur.com/acUmQXm.png' width='200px' height='200px'>";
+
 // //Questions and Options Array
 let quizArray = [];
+let logosLoaded = false;
 
-const generateRandomValue = (array) =>
-  array[Math.floor(Math.random() * array.length)];
+const generateRandomValue = (logos) => {
+  const randomIndex = Math.floor(Math.random() * logos.length);
+  const randomValue = logos[randomIndex];
+  console.log("Generated Random Value:", randomValue);
+  return randomValue;
+};
 
 //Generate Logos
 const logoGenerator = () => {
-  newLogo = "";
+  let newLogo = "";
   for (let i = 0; i < 1; i++) {
     newLogo += generateRandomValue(logos);
   }
+  console.log("Generated Logo:", newLogo);
   return newLogo;
 };
 
 // Using Axios to get images from AWS
-const getLogos = () => {
-  logos.forEach((logo) => {
-    axios
-      .get(logo.path)
-      .then((response) => {
-        const image = response.data;
-        console.log(`GET logo`, image);
-      })
-      .catch((error) => console.error(error));
+const getLogos = (newLogo) => {
+  return Promise.all(
+    logos.map((path) => {
+      return axios
+        .get(path)
+        .then((response) => {
+          const image = response.data;
+          // console.log(`GET logo:`, image);
+          return image;
+        })
+        .catch((error) => console.error(error));
+    })
+  ).then((newLogo) => {
+    logosLoaded = true;
+    console.log("Logo images loaded successfully.");
+    return newLogo;
   });
 };
-getLogos();
+
 
 //Create Options
-const populateOptions = (imageArray) => {
+const populateOptions = (logos) => {
   let expectedLength = 4;
-  while (imageArray.length < expectedLength) {
+  while (logos.length < expectedLength) {
     let logo = logoGenerator();
-    if (!imageArray.includes(logo)) {
-      imageArray.push(logo);
+    if (!logos.includes(logo)) {
+      logos.push(logo);
     }
   }
-  return imageArray;
+  console.log("Populated Options:", logos);
+  return logos;
 };
 
 //Create quiz Object
 const populateQuiz = () => {
+  if (!logosLoaded) {
+    console.log("Logos are not loaded yet. Please wait.");
+    return;
+  }
+
   for (let i = 0; i < 5; i++) {
     let currentLogo = logoGenerator();
     let allLogos = [];
     allLogos.push(currentLogo);
     allLogos = populateOptions(allLogos);
     let logoImages = allLogos.map((logo) => {
-      return { imgFile: imageArray.find((str) => str.includes(logo)), logo };
+      return { imgFile: logos.find((str) => str.includes(logo)), logo };
     });
     quizArray.push({
       id: i,
@@ -192,13 +212,16 @@ const populateQuiz = () => {
       options: logoImages,
     });
   }
+  console.log("Populated Quiz Array:", quizArray);
 };
+
 //Next button
 nextButton.addEventListener(
   "click",
   (displayNext = () => {
     //increment questionCOunt
     questionCount += 1;
+    console.log("Question Count:", questionCount);
     //If last question
     if (questionCount == quizArray.length) {
       //hide question container and display score
@@ -208,12 +231,12 @@ nextButton.addEventListener(
       //User score
       userScore.innerHTML =
         "Your score is " + scoreCount + " out of " + questionCount;
-      console.log("finalScore", scoreCount);
+      console.log("Final score:", scoreCount);
     } else {
       //display questionCount
       numOfQuestions.innerHTML =
         questionCount + 1 + " of " + quizArray.length + " Question";
-      console.log("updatedScore", scoreCount);
+      console.log("Updated score:", scoreCount);
       //display quiz
       quizDisplay(questionCount);
       count = 5;
@@ -231,8 +254,10 @@ const timerDisplay = () => {
   countdown = setInterval(() => {
     timer.innerHTML = `<span>Time Left: </span> ${count}s`;
     count--;
+    console.log("Count:", count);
     if (count == 0) {
       clearInterval(countdown);
+      console.log("Timer Expired!");
       displayNext();
     }
   }, 1000);
@@ -248,43 +273,45 @@ const quizDisplay = (questionCount) => {
 
   //display current question card
   quizCards[questionCount].classList.remove("hide");
+  console.log("Displaying Question:", questionCount + 1);
 };
 
 //Quiz Creation
 function quizCreator() {
   //randomly sort questions
   quizArray.sort(() => Math.random() - 0.5);
+  console.log("Quiz Array after sorting:", quizArray);
+}
 
-  //Generate quiz
-  for (let i of quizArray) {
-    //Randomly sort options
-    i.options.sort(() => Math.random() - 0.5);
+//Generate quiz
+for (let i of quizArray) {
+  //Randomly sort options
+  i.options.sort(() => Math.random() - 0.5);
 
-    //Quiz card creation
-    let div = document.createElement("div");
-    div.classList.add("container-mid", "hide");
+  //Quiz card creation
+  let div = document.createElement("div");
+  div.classList.add("container-mid", "hide");
 
-    //Question number
-    numOfQuestions.innerHTML = 1 + " of " + quizArray.length + " Question";
+  //Question number
+  numOfQuestions.innerHTML = 1 + " of " + quizArray.length + " Question";
 
-    //question
-    let questionDiv = document.createElement("p");
-    questionDiv.classList.add("question");
-    questionDiv.innerHTML = `<div class="question-logo">${i.correct}</div>`;
-    div.appendChild(questionDiv);
-    console.log("i", i);
-    div.innerHTML += `<div class="button-container">`;
-    for (let option of i.options) {
-      if (option.imgFile) {
-        div.innerHTML += `<button class="option-div" onclick="checker(this)" data-option="${option.logo}" style= "background-image: url(${option.imgFile})"></button>`;
-      } else {
-        console.log(`Missing logo for - ${option.logo}!`);
-      }
+  //question
+  let questionDiv = document.createElement("p");
+  questionDiv.classList.add("question");
+  questionDiv.innerHTML = `<div class="question-logo">${i.correct}</div>`;
+  div.appendChild(questionDiv);
+  console.log("i", i);
+  div.innerHTML += `<div class="button-container">`;
+  for (let option of i.options) {
+    if (option.imgFile) {
+      div.innerHTML += `<button class="option-div" onclick="checker(this)" data-option="${option.logo}" style= "background-image: url(${option.imgFile})"></button>`;
+    } else {
+      console.log(`Missing logo for - ${option.logo}!`);
     }
-    div.innerHTML += `</div>`;
-    //Options
-    quizContainer.appendChild(div);
   }
+  div.innerHTML += `</div>`;
+  //Options
+  quizContainer.appendChild(div);
 }
 
 function checker(userOption) {
@@ -344,6 +371,9 @@ startButton.addEventListener("click", () => {
   startScreen.classList.add("hide");
   displayContainer.classList.remove("hide");
   quizArray = [];
-  populateQuiz();
-  initial();
+  getLogos().then(() => {
+    populateQuiz();
+    initial();
+  });
 });
+
