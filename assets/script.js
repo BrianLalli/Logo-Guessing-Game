@@ -130,19 +130,22 @@ let logos = [
 
 console.log("initialScore", scoreCount);
 
+
 // Instructions & Logo
 instructions.innerHTML = "Guess the logo without seeing it in full";
 let oogl = document.getElementById("oogl");
-oogl.innerHTML =
-  "<img src='https://i.imgur.com/acUmQXm.png' width='200px' height='200px'>";
+oogl.innerHTML = "<img src='https://i.imgur.com/acUmQXm.png' width='200px' height='200px'>";
 
 // //Questions and Options Array
 let quizArray = [];
-let logosLoaded = false;
 
-const generateRandomValue = (logos) => {
-  const randomIndex = Math.floor(Math.random() * logos.length);
-  const randomValue = logos[randomIndex];
+const generateRandomValue = (array) => {
+  if (array.length === 0) {
+    console.error("Empty array provided to generateRandomValue");
+    return null;
+  }
+  const randomIndex = Math.floor(Math.random() * array.length);
+  const randomValue = array[randomIndex];
   console.log("Generated Random Value:", randomValue);
   return randomValue;
 };
@@ -151,55 +154,39 @@ const generateRandomValue = (logos) => {
 const logoGenerator = () => {
   let newLogo = "";
   for (let i = 0; i < 1; i++) {
-    newLogo += generateRandomValue(logos);
+    let randomLogo = generateRandomValue(logos);
+    newLogo += randomLogo.name;
   }
   console.log("Generated Logo:", newLogo);
   return newLogo;
 };
 
-// Using Axios to get images from AWS
-const getLogos = (newLogo) => {
-  return Promise.all(
-    logos.map((path) => {
-      return axios
-        .get(path)
-        .then((response) => {
-          const image = response.data;
-          // console.log(`GET logo:`, image);
-          return image;
-        })
-        .catch((error) => console.error(error));
-    })
-  ).then((newLogo) => {
-    logosLoaded = true;
-    console.log("Logo images loaded successfully.");
-    return newLogo;
-  });
-};
-
 
 //Create Options
-const populateOptions = (logos) => {
+const populateOptions = (imageArray) => {
+  if (imageArray.length === 0) {
+    console.error("Empty array provided to populateOptions");
+    return imageArray;
+  }
   let expectedLength = 4;
-  while (logos.length < expectedLength) {
+  while (imageArray.length < expectedLength) {
     let logo = logoGenerator();
-    if (!logos.includes(logo)) {
-      logos.push(logo);
+    if (!imageArray.includes(logo)) {
+      imageArray.push(logo);
     }
   }
-  console.log("Populated Options:", logos);
-  return logos;
+  return imageArray;
 };
+
 
 //Create quiz Object
 const populateQuiz = () => {
-  if (!logosLoaded) {
-    console.log("Logos are not loaded yet. Please wait.");
-    return;
-  }
-
   for (let i = 0; i < 5; i++) {
     let currentLogo = logoGenerator();
+    if (!currentLogo) {
+      console.error("Failed to generate a logo for quiz");
+      continue;
+    }
     let allLogos = [];
     allLogos.push(currentLogo);
     allLogos = populateOptions(allLogos);
@@ -213,6 +200,25 @@ const populateQuiz = () => {
     });
   }
   console.log("Populated Quiz Array:", quizArray);
+};
+
+// Using Axios to get images from AWS
+const getLogos = () => {
+  return Promise.all(
+    logos.map((logo) => {
+      return axios
+        .get(logo.path)
+        .then((response) => {
+          const image = response.data;
+          // console.log(`GET logo:`, image);
+          return { imgFile: image, logo: logo.name };
+        })
+        .catch((error) => console.error(error));
+    })
+  ).then((logoImages) => {
+    console.log("Logo images loaded successfully.");
+    return logoImages;
+  });
 };
 
 //Next button
@@ -266,22 +272,29 @@ const timerDisplay = () => {
 //Display Quiz
 const quizDisplay = (questionCount) => {
   let quizCards = document.querySelectorAll(".container-mid");
-  //hide other cards
-  quizCards.forEach((card) => {
-    card.classList.add("hide");
-  });
-
-  //display current question card
-  quizCards[questionCount].classList.remove("hide");
-  console.log("Displaying Question:", questionCount + 1);
+  if (quizCards.length > 0) {
+    quizCards.forEach((card) => {
+      card.classList.add("hide");
+    });
+    quizCards[questionCount].classList.remove("hide");
+    console.log("Displaying Question:", questionCount + 1);
+  } else {
+    console.error("No quiz cards found.");
+  }
 };
 
-//Quiz Creation
-function quizCreator() {
-  //randomly sort questions
-  quizArray.sort(() => Math.random() - 0.5);
-  console.log("Quiz Array after sorting:", quizArray);
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
+
+//Quiz Creation
+const quizCreator = () => {
+  shuffleArray(quizArray);
+  console.log("Quiz Array after shuffling:", quizArray);
+};
 
 //Generate quiz
 for (let i of quizArray) {
@@ -304,7 +317,7 @@ for (let i of quizArray) {
   div.innerHTML += `<div class="button-container">`;
   for (let option of i.options) {
     if (option.imgFile) {
-      div.innerHTML += `<button class="option-div" onclick="checker(this)" data-option="${option.logo}" style= "background-image: url(${option.imgFile})"></button>`;
+      div.innerHTML += `<button class="option-div" onclick="checker(this)" data-option="${option.logo}" style= "background-image: url(${option.imgFile.path})"></button>`;
     } else {
       console.log(`Missing logo for - ${option.logo}!`);
     }
@@ -347,14 +360,18 @@ function checker(userOption) {
 
 function initial() {
   nextButton.classList.add("hide");
-  quizContainer.innerHTML = "";
-  questionCount = 0;
-  scoreCount = 0;
-  clearInterval(countdown);
-  count = 5;
-  timerDisplay();
-  quizCreator();
-  quizDisplay(questionCount);
+  let quizCards = document.querySelectorAll(".container-mid");
+  if (quizCards.length > 0) {
+    questionCount = 0;
+    scoreCount = 0;
+    clearInterval(countdown);
+    count = 5;
+    timerDisplay();
+    quizCreator();
+    quizDisplay(questionCount);
+  } else {
+    console.error("No quiz cards found.");
+  }
 }
 
 //Restart game
@@ -371,9 +388,6 @@ startButton.addEventListener("click", () => {
   startScreen.classList.add("hide");
   displayContainer.classList.remove("hide");
   quizArray = [];
-  getLogos().then(() => {
-    populateQuiz();
-    initial();
-  });
+  populateQuiz();
+  initial();
 });
-
