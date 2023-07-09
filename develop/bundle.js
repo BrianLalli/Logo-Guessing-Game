@@ -8,118 +8,146 @@
 // <!-- Stylesheet -->
 <style>
 * {
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-    color: #19084e;
-  }
-  body {
-    margin: 0;
-    background-color: #48C3F5;
-  }
-  button {
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
-  .start-screen,
-  .score-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #48C3F5;
-    gap: 1em;
-  }
-  #start-button,
-  #restart {
-    position: absolute;
-    margin-top: 355px;
-    font-size: 1.2em;
-    padding: 1em 3em;
-    border-radius: 2em;
-    box-shadow: 0 1em 3em rgba(37, 22, 80, 0.3);
-  }
-  .flex-space {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .flex {
-    display: flex;
-  }
-  #display-container {
-    background-color: #ffffff;
-    position: absolute;
-    width: 50vw; /* vw stands for viewport width, this will be 50% of the viewport's width */
-    max-height: 100vh; /* vh stands for viewport height, this will be 100% of the viewport's height */
-    overflow-y: auto; /* if the content is too tall, it will scroll */
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-    padding: 1em 2em; /* reduce padding on smaller screens */
-    border-radius: 0.8em;
-    box-shadow: 0 1em 3em rgba(37, 22, 80, 0.3);
-  }
-  .header {
-    padding: 0.1em;
-    border-bottom: 1px solid #c8c5d1;
-  }
-  .header .title,
-  .timer span {
-    font-weight: 600;
-  }
-  h3 {
-    font-size: 1.2em;
-    text-align: center;
-  }
-  #container {
-    /* display: grid;
-    grid-template-columns: 4fr 4fr; */
-    gap: 0.8em;
-    place-items: center;
-    margin-bottom: 1em;
-  }
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #19084e;
+}
+
+body {
+  margin: 0;
+  background-color: #48c3f5;
+}
+
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.start-screen,
+.score-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #48c3f5;
+  gap: 1em;
+}
+
+#start-button,
+#restart {
+  font-size: 1.2em;
+  padding: 1em 3em;
+  border-radius: 2em;
+  box-shadow: 0 1em 3em rgba(37, 22, 80, 0.3);
+  /* margin-top: 2em; */
+}
+
+.flex-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex {
+  display: flex;
+}
+
+#display-container {
+  background-color: #ffffff;
+  position: absolute;
+  width: 80%;
+  max-width: 800px; /* adjust this as needed */
+  max-height: 100%;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  padding: 1em 2em;
+  border-radius: 0.8em;
+  box-shadow: 0 1em 3em rgba(37, 22, 80, 0.3);
+}
+
+.header {
+  padding: 0.1em;
+  border-bottom: 1px solid #c8c5d1;
+}
+
+.header .title,
+.timer span {
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+#container {
+  gap: 0.8em;
+  place-items: center;
+  margin-bottom: 1em;
+}
+
+.logo-container {
+  width: 100%;
+  height: 10em;
+  padding: 1em;
+  margin: 0.3em 0;
+  border-radius: 0.5em;
+  border: 3px solid black;
+  background-size: 175%; /* adjust this as needed */
+}
+
+@media (min-width: 600px) {
   .logo-container {
-    width: 100%;
-    height: 10em;
-    padding: 1em;
-    margin: 0.3em 0;
-    border-radius: 0.5em;
-    border: 3px solid black;
-    background-size: 130%;
+    background-size: 130%; /* the original size for larger screens */
   }
-  .option-div:disabled {
-    cursor: not-allowed;
+}
+
+.option-div:disabled {
+  cursor: not-allowed;
+}
+
+.correct {
+  background: url("https://icons.veryicon.com/png/o/miscellaneous/linear-icon-2-1/correct-28.png");
+}
+
+.incorrect {
+  background: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fwrong-icon%2F&psig=AOvVaw0mQLFQZP7Z9k0OD4fiW2gV&ust=1681066742220000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCn-uH7mv4CFQAAAAAdAAAAABAE");
+}
+
+.correct,
+.incorrect {
+  background-repeat: no-repeat;
+  background-size: 3em;
+  background-position: center;
+}
+
+#next-button {
+  font-size: 1.1em;
+  background-color: #fcef27;
+  color: black;
+  padding: 0.4em 2em;
+  border-radius: 0.3em;
+}
+
+.hide {
+  display: none;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 600px) {
+  #display-container {
+    width: 90%;
+    padding: 0.5em 1em;
   }
-  .correct {
-    background: url("https://icons.veryicon.com/png/o/miscellaneous/linear-icon-2-1/correct-28.png");
-  }
-  .incorrect {
-    background: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fuxwing.com%2Fwrong-icon%2F&psig=AOvVaw0mQLFQZP7Z9k0OD4fiW2gV&ust=1681066742220000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCn-uH7mv4CFQAAAAAdAAAAABAE");
-  }
-  .correct,
-  .incorrect {
-    background-repeat: no-repeat;
-    background-size: 3em;
-    background-position: center;
-  }
-  #next-button {
-    font-size: 1.1em;
-    background-color: #FCEF27;
-    color: black;
-    padding: 0.4em 2em;
-    border-radius: 0.3em;
-  }
-  .hide {
-    display: none;
-  }
-  #restart {
-    margin-top: 6em;
-  }
+}
+
 </style>
 
 <div id="display-container">
@@ -138,7 +166,6 @@
     <div class="number-of-count">
       <span class="number-of-questions"></span>
     </div>
-    <div id="next-button">Next</div>
   </div>
 </div>
 
@@ -154,7 +181,6 @@
   <button id="restart">Restart</button>
 </div>
 <!-- Script -->
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 let timer = document.getElementsByClassName("timer")[0];
 let quizContainer = document.getElementById("container");
@@ -366,39 +392,35 @@ const populateQuiz = () => {
   console.log("Populated Quiz Array:", quizArray);
 };
 
-//Next button
-nextButton.addEventListener(
-  "click",
-  (displayNext = () => {
-    //increment questionCOunt
-    questionCount += 1;
-    console.log("Question Count:", questionCount);
-    //If last question
-    if (questionCount == quizArray.length) {
-      //hide question container and display score
-      displayContainer.classList.add("hide");
-      scoreContainer.classList.remove("hide");
+// Define displayNext function
+window.displayNext = function () {
+  //increment questionCount
+  questionCount += 1;
+  console.log("Question Count:", questionCount);
+  //If last question
+  if (questionCount == quizArray.length) {
+    //hide question container and display score
+    displayContainer.classList.add("hide");
+    scoreContainer.classList.remove("hide");
 
-      //User score
-      userScore.innerHTML =
-        "Your score is " + scoreCount + " out of " + questionCount;
-      console.log("Final score:", scoreCount);
-    } else {
-      //display questionCount
-      numOfQuestions.innerHTML =
-        questionCount + 1 + " of " + quizArray.length + " Question";
-      console.log("Updated score:", scoreCount);
-      //display quiz
-      quizDisplay(questionCount);
-      count = 5;
-      //clearInterval for next question
-      clearInterval(countdown);
-      //display timer
-      timerDisplay();
-    }
-    nextButton.classList.add("hide");
-  })
-);
+    //User score
+    userScore.innerHTML =
+      "Your score is " + scoreCount + " out of " + questionCount;
+    console.log("Final score:", scoreCount);
+  } else {
+    //display questionCount
+    numOfQuestions.innerHTML =
+      questionCount + 1 + " of " + quizArray.length + " Question";
+    console.log("Updated score:", scoreCount);
+    //display quiz
+    quizDisplay(questionCount);
+    count = 5;
+    //clearInterval for next question
+    clearInterval(countdown);
+    //display timer
+    timerDisplay();
+  }
+};
 
 //Timer
 const timerDisplay = () => {
@@ -424,16 +446,15 @@ const quizDisplay = (questionIndex) => {
 
   quizData.options.forEach((option) => {
     let imgContainer = document.createElement("div");
-    imgContainer.classList.add('logo-container');  // Add a class for CSS styling
+    imgContainer.classList.add("logo-container"); // Add a class for CSS styling
     imgContainer.style.backgroundImage = `url(${option.imgFile.path})`;
     imgContainer.addEventListener("click", () => {
       if (option.logo === quizData.correct) scoreCount++;
-      displayNext();
+      displayNext(); // Call displayNext() here
     });
     quizContainer.appendChild(imgContainer);
   });
 };
-
 
 // Function to shuffle array
 function shuffleArray(array) {
@@ -505,11 +526,10 @@ function checker(userOption) {
   options.forEach((element) => {
     element.disabled = true;
   });
-  nextButton.classList.remove("hide");
+  displayNext(); // Call displayNext() here
 }
 
 function initial() {
-  nextButton.classList.add("hide");
   let quizCards = document.querySelectorAll(".container-mid");
   if (quizCards.length > 0) {
     questionCount = 0;
