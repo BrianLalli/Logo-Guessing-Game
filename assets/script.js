@@ -114,10 +114,6 @@ let logos = [
   { name: "Uniqlo", path: "https://oogl.s3.amazonaws.com/images/Uniqlo.png" },
   { name: "ups", path: "https://oogl.s3.amazonaws.com/images/ups.png" },
   {
-    name: "Verizon",
-    path: "https://oogl.s3.amazonaws.com/images/Verizon.png",
-  },
-  {
     name: "Walt Disney Pictures",
     path: "https://oogl.s3.amazonaws.com/images/WaltDisneyPictures.png",
   },
