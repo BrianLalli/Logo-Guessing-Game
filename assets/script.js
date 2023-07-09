@@ -24,7 +24,7 @@ let logos = [
   { name: "AT&T", path: "https://oogl.s3.amazonaws.com/images/AT&T.png" },
   { name: "Audi", path: "https://oogl.s3.amazonaws.com/images/Audi.png" },
   {
-    name: "BankofAmerica",
+    name: "Bank of America",
     path: "https://oogl.s3.amazonaws.com/images/BankofAmerica.png",
   },
   { name: "BMW", path: "https://oogl.s3.amazonaws.com/images/BMW.png" },
@@ -67,7 +67,7 @@ let logos = [
   { name: "KFC", path: "https://oogl.s3.amazonaws.com/images/KFC.png" },
   { name: "Lexus", path: "https://oogl.s3.amazonaws.com/images/Lexus.png" },
   {
-    name: "LouisVuitton",
+    name: "Louis Vuitton",
     path: "https://oogl.s3.amazonaws.com/images/LouisVuitton.png",
   },
   { name: "Lowes", path: "https://oogl.s3.amazonaws.com/images/Lowes.png" },
@@ -80,7 +80,7 @@ let logos = [
     path: "https://oogl.s3.amazonaws.com/images/McDonalds.png",
   },
   {
-    name: "MercedesBenz",
+    name: "Mercedes Benz",
     path: "https://oogl.s3.amazonaws.com/images/MercedesBenz.png",
   },
   {
@@ -118,11 +118,11 @@ let logos = [
     path: "https://oogl.s3.amazonaws.com/images/Verizon.png",
   },
   {
-    name: "WaltDisneyPictures",
+    name: "Walt Disney Pictures",
     path: "https://oogl.s3.amazonaws.com/images/WaltDisneyPictures.png",
   },
   {
-    name: "WholeFoodsMarket",
+    name: "Whole Foods Market",
     path: "https://oogl.s3.amazonaws.com/images/WholeFoodsMarket.png",
   },
 ];
@@ -266,7 +266,8 @@ const quizDisplay = (questionIndex) => {
 
   quizData.options.forEach((option) => {
     let imgContainer = document.createElement("div");
-    imgContainer.innerHTML = `<img src="${option.imgFile.path}" alt="${option.logo}" width="200" height="200">`;
+    imgContainer.classList.add('logo-container');  // Add a class for CSS styling
+    imgContainer.style.backgroundImage = `url(${option.imgFile.path})`;
     imgContainer.addEventListener("click", () => {
       if (option.logo === quizData.correct) scoreCount++;
       displayNext();
@@ -274,6 +275,7 @@ const quizDisplay = (questionIndex) => {
     quizContainer.appendChild(imgContainer);
   });
 };
+
 
 // Function to shuffle array
 function shuffleArray(array) {

@@ -45,12 +45,13 @@
   #display-container {
     background-color: #ffffff;
     position: absolute;
-    width: 90%;
-    max-width: 47em;
+    width: 50vw; /* vw stands for viewport width, this will be 50% of the viewport's width */
+    max-height: 100vh; /* vh stands for viewport height, this will be 100% of the viewport's height */
+    overflow-y: auto; /* if the content is too tall, it will scroll */
     transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
-    padding: 2em 6em;
+    padding: 1em 2em; /* reduce padding on smaller screens */
     border-radius: 0.8em;
     box-shadow: 0 1em 3em rgba(37, 22, 80, 0.3);
   }
@@ -62,26 +63,25 @@
   .timer span {
     font-weight: 600;
   }
-  .question-logo {
-    font-size: 1.5em;
+  h3 {
+    font-size: 1.2em;
     text-align: center;
   }
   #container {
-    margin-bottom: 1em;
-  }
-  .button-container {
-    display: grid;
-    grid-template-columns: 2fr 2fr;
+    /* display: grid;
+    grid-template-columns: 4fr 4fr; */
     gap: 0.8em;
     place-items: center;
+    margin-bottom: 1em;
   }
-  .option-div {
+  .logo-container {
     width: 100%;
     height: 10em;
     padding: 1em;
     margin: 0.3em 0;
     border-radius: 0.5em;
     border: 3px solid black;
+    background-size: 130%;
   }
   .option-div:disabled {
     cursor: not-allowed;
