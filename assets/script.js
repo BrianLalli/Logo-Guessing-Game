@@ -208,39 +208,35 @@ const populateQuiz = () => {
   console.log("Populated Quiz Array:", quizArray);
 };
 
-//Next button
-nextButton.addEventListener(
-  "click",
-  (displayNext = () => {
-    //increment questionCOunt
-    questionCount += 1;
-    console.log("Question Count:", questionCount);
-    //If last question
-    if (questionCount == quizArray.length) {
-      //hide question container and display score
-      displayContainer.classList.add("hide");
-      scoreContainer.classList.remove("hide");
+// Define displayNext function
+window.displayNext = function () {
+  //increment questionCount
+  questionCount += 1;
+  console.log("Question Count:", questionCount);
+  //If last question
+  if (questionCount == quizArray.length) {
+    //hide question container and display score
+    displayContainer.classList.add("hide");
+    scoreContainer.classList.remove("hide");
 
-      //User score
-      userScore.innerHTML =
-        "Your score is " + scoreCount + " out of " + questionCount;
-      console.log("Final score:", scoreCount);
-    } else {
-      //display questionCount
-      numOfQuestions.innerHTML =
-        questionCount + 1 + " of " + quizArray.length + " Question";
-      console.log("Updated score:", scoreCount);
-      //display quiz
-      quizDisplay(questionCount);
-      count = 5;
-      //clearInterval for next question
-      clearInterval(countdown);
-      //display timer
-      timerDisplay();
-    }
-    nextButton.classList.add("hide");
-  })
-);
+    //User score
+    userScore.innerHTML =
+      "Your score is " + scoreCount + " out of " + questionCount;
+    console.log("Final score:", scoreCount);
+  } else {
+    //display questionCount
+    numOfQuestions.innerHTML =
+      questionCount + 1 + " of " + quizArray.length + " Question";
+    console.log("Updated score:", scoreCount);
+    //display quiz
+    quizDisplay(questionCount);
+    count = 5;
+    //clearInterval for next question
+    clearInterval(countdown);
+    //display timer
+    timerDisplay();
+  }
+};
 
 //Timer
 const timerDisplay = () => {
@@ -266,16 +262,15 @@ const quizDisplay = (questionIndex) => {
 
   quizData.options.forEach((option) => {
     let imgContainer = document.createElement("div");
-    imgContainer.classList.add('logo-container');  // Add a class for CSS styling
+    imgContainer.classList.add("logo-container"); // Add a class for CSS styling
     imgContainer.style.backgroundImage = `url(${option.imgFile.path})`;
     imgContainer.addEventListener("click", () => {
       if (option.logo === quizData.correct) scoreCount++;
-      displayNext();
+      displayNext(); // Call displayNext() here
     });
     quizContainer.appendChild(imgContainer);
   });
 };
-
 
 // Function to shuffle array
 function shuffleArray(array) {
@@ -347,11 +342,10 @@ function checker(userOption) {
   options.forEach((element) => {
     element.disabled = true;
   });
-  nextButton.classList.remove("hide");
+  displayNext(); // Call displayNext() here
 }
 
 function initial() {
-  nextButton.classList.add("hide");
   let quizCards = document.querySelectorAll(".container-mid");
   if (quizCards.length > 0) {
     questionCount = 0;
